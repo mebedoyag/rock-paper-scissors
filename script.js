@@ -1,3 +1,7 @@
+/*
+
+*/
+
 function game() {
 
     let userScore = 0;
@@ -7,15 +11,16 @@ function game() {
         let userChoice = prompt("Welcome to game: Rock, Paper & Scissors\n\nPlease enter your handsign: ");
         if ( userChoice == null ) {
             console.log("You did not enter any.");
+            --i;
         } else {
             let machineChoice = createRandomHandSign();
             let result = playOneRound( userChoice.toLowerCase().trim(), machineChoice );
             console.log(result);
             if ( result == "You WIN!" ) {
                 ++userScore;
-            } else if ( "You LOST :)" ) {
+            } else if ( result == "You LOST :)" ) {
                 ++machineScore;
-            }
+            } else if ( result == "No valid" ) --i;
         }
     }
     if ( userScore > machineScore ) {
@@ -26,7 +31,7 @@ function game() {
 }
 /*
 - Data definition
-a String represents each element.
+each element is a String.
 - Signature
 String String -> String
 - Purpose statement
@@ -55,7 +60,7 @@ function playOneRound( userHandSign, machineHandSign ) {
         return "You WIN!";
     } else if ( userHandSign == "rock" && machineHandSign == "paper" ) {
         return "You LOST :)";
-    } else return "Please enter a hand sign valid.";
+    } else return "No valid";
 }
 /*
 - Data definition
