@@ -1,63 +1,88 @@
+function game() {
+
+    let userScore = 0;
+    let machineScore = 0;
+
+    for ( let i = 0; i < 5; ++i ) {
+        let userChoice = prompt("Welcome to game: Rock, Paper & Scissors\n\nPlease enter your handsign: ");
+        if ( userChoice == null ) {
+            console.log("You did not enter any.");
+        } else {
+            let machineChoice = createRandomHandSign();
+            let result = playOneRound( userChoice.toLowerCase().trim(), machineChoice );
+            console.log(result);
+            if ( result == "You WIN!" ) {
+                ++userScore;
+            } else if ( "You LOST :)" ) {
+                ++machineScore;
+            }
+        }
+    }
+    if ( userScore > machineScore ) {
+        return "User is the winner"
+    } else if ( userScore < machineScore ) {
+        return "Machine is the winner"
+    } else return "The game is tied"
+}
 /*
-1rst
 - Data definition
 a String represents each element.
-2nd
 - Signature
 String String -> String
 - Purpose statement
-compare UserHandSign against machine's choice, and acording to rules, show a message
-that can be: You WIN !, You LOST :), It is a tie.
-3rd
+compare UserHandSign against machineHandSign, the last is randomly selected, and based on rules, show a message
+that can be: You WIN !, You LOST :), There is a tie.
 - Examples
-given: "rock", expect: "You WIN" ! if choice's machine is "scisorss"
-given: "paper", expect: "You LOST" :) if choice's machine is "scisorss"
-given: "scissors", expect: "It is a tie." if choice's machine is "scisorss"
-4th
-function gameRockPaperScissors( UserHandSign ) { ... UserHandSign ...}
+given: "rock", expect: "You WIN!" if choice's machine is "scisorss"
+given: "paper", expect: "You LOST :)"" if choice's machine is "scisorss"
+given: "scissors", expect: "There is a tie." if choice's machine is "scisorss"
+- Function template
+function playOneRound( UserHandSign ) { ... UserHandSign ...}
 */
-
-function playRockPaperScissors( userHandSign ) {
-    let machineHandSign = createRandomHandSign();
+function playOneRound( userHandSign, machineHandSign ) {
 
     if ( userHandSign == machineHandSign ) {
-        console.log("It is a tie.");
+        return "There is a tie.";
     } else if ( userHandSign == "paper" && machineHandSign == "rock" ) {
-        console.log("You WIN!");
+        return "You WIN!";
     } else if ( userHandSign == "paper" && machineHandSign == "scissors" ){
-        console.log("You LOST :)");
+        return "You LOST :)";
     } else if ( userHandSign == "scisorss" && machineHandSign == "paper" ) {
-        console.log("You WIN!");
+        return "You WIN!";
     } else if ( userHandSign == "scisorss" && machineHandSign == "rock"  ) {
-        console.log("You LOST :)");
+        return "You LOST :)";
     } else if ( userHandSign == "rock" && machineHandSign == "scisorss" ) {
-        console.log("You WIN!");
+        return "You WIN!";
     } else if ( userHandSign == "rock" && machineHandSign == "paper" ) {
-        console.log("You LOST :)");
-    } else console.log("Please enter a hand sign valid.");
-
-    if ( confirm("Would you like to game again?") ) main();
-    // else return;
+        return "You LOST :)";
+    } else return "Please enter a hand sign valid.";
 }
-function main() {
-    let userChoice = prompt("Welcome to game: Rock, Paper & Scissors\n\nPlease enter your handsign: ");
-    if ( userChoice == null ) {
-        console.log("Please enter a hand sign valid.");
-    } else playRockPaperScissors( userChoice.toLowerCase().trim() );
-}
-
+/*
+- Data definition
+A Number among 0, 1, 2 represents a handsign.
+- Signature
+nothing -> String
+- Purpose statement
+when it is invoke, use random and floor from built in function Math to
+get a random number.
+- Examples
+given: 2.3, expect: 2 -> scisorss
+given: 0, expect: 0 -> rock
+- Function template
+function createRandomHandSign() { ... }
+*/
 function createRandomHandSign() {
-    let machineChoice = Math.floor((Math.random() * 3));
-    switch (machineChoice) {
+    let numberRandom = Math.floor( (Math.random() * 3) );
+    switch ( numberRandom ) {
         case 0:
-            return "rock";
-            break;
+        return "rock";
+        break;
         case 1:
-            return "paper";
-            break;
+        return "paper";
+        break;
         case 2:
-            return "scissors";
-            break;
+        return "scissors";
+        break;
         default:
     }
 }
