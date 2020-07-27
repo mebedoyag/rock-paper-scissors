@@ -17,15 +17,46 @@ given: "scissors", expect: "It is a tie." if choice's machine is "scisorss"
 function gameRockPaperScissors( UserHandSign ) { ... UserHandSign ...}
 */
 
-function gameRockPaperScissors(UserHandSign) {
-    let machineChoice = "rock";
+function playRockPaperScissors( userHandSign ) {
+    let machineHandSign = createRandomHandSign();
 
-    if ( UserHandSign == machineChoice ) console.log("It is a tie.");
-    if ( UserHandSign == "paper" && machineChoice == "rock")  console.log("You WIN!");
-    if ( UserHandSign == "scissors" && machineChoice == "rock")  console.log("You LOST :)");
+    if ( userHandSign == machineHandSign ) {
+        console.log("It is a tie.");
+    } else if ( userHandSign == "paper" && machineHandSign == "rock" ) {
+        console.log("You WIN!");
+    } else if ( userHandSign == "paper" && machineHandSign == "scissors" ){
+        console.log("You LOST :)");
+    } else if ( userHandSign == "scisorss" && machineHandSign == "paper" ) {
+        console.log("You WIN!");
+    } else if ( userHandSign == "scisorss" && machineHandSign == "rock"  ) {
+        console.log("You LOST :)");
+    } else if ( userHandSign == "rock" && machineHandSign == "scisorss" ) {
+        console.log("You WIN!");
+    } else if ( userHandSign == "rock" && machineHandSign == "paper" ) {
+        console.log("You LOST :)");
+    } else console.log("Please enter a hand sign valid.");
+
+//     if ( confirm("Would you like to game again?") ) main();
+//     else return;
 }
 
 function main() {
-    let UserChoice = prompt("Welcome to game: Rock, Paper & Scissors\n\nPlease enter your handsign: ");
-    gameRockPaperScissors(UserChoice);
+    let userChoice = prompt("Welcome to game: Rock, Paper & Scissors\n\nPlease enter your handsign: ");
+    playRockPaperScissors( userChoice );
+}
+
+function createRandomHandSign() {
+    let machineChoice = Math.floor((Math.random() * 3));
+    switch (machineChoice) {
+        case 0:
+            return "rock";
+            break;
+        case 1:
+            return "paper";
+            break;
+        case 2:
+            return "scissors";
+            break;
+        default:
+    }
 }
