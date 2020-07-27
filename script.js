@@ -4,7 +4,7 @@
 a String represents each element.
 2nd
 - Signature
-String -> String
+String String -> String
 - Purpose statement
 compare UserHandSign against machine's choice, and acording to rules, show a message
 that can be: You WIN !, You LOST :), It is a tie.
@@ -36,13 +36,14 @@ function playRockPaperScissors( userHandSign ) {
         console.log("You LOST :)");
     } else console.log("Please enter a hand sign valid.");
 
-//     if ( confirm("Would you like to game again?") ) main();
-//     else return;
+    if ( confirm("Would you like to game again?") ) main();
+    // else return;
 }
-
 function main() {
     let userChoice = prompt("Welcome to game: Rock, Paper & Scissors\n\nPlease enter your handsign: ");
-    playRockPaperScissors( userChoice );
+    if ( userChoice == null ) {
+        console.log("Please enter a hand sign valid.");
+    } else playRockPaperScissors( userChoice.toLowerCase().trim() );
 }
 
 function createRandomHandSign() {
