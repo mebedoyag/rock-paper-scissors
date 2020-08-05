@@ -1,6 +1,73 @@
-/*
+const resultWin = 'You WIN!';
+const resultLost = 'You LOST :)';
+const resultTie = 'There is a tie.';
 
+const rock = 'rock';
+const paper = 'paper';
+const scissors = 'scissors';
+
+/*
+A HandSign is one of those:
+- rock
+- paper
+- scissors
+Interpretation: each HandSign corresponds to the element
 */
+
+/*
+Number -> HandSign
+When it is invoke, use random and floor to get a whole random number, between
+0 until Number-1.
+given: 3, expect: scisorss
+given: 3, expect: rock
+given: 3, expect: paper
+function computerPlay( options ) { ... }
+*/
+function computerPlay( options ) {
+    let numberRandom = Math.floor( Math.random() * options );
+    switch ( numberRandom ) {
+        case 0:
+        return rock;
+        break;
+        case 1:
+        return paper;
+        break;
+        case 2:
+        return scissors;
+        break;
+        // default:
+    }
+}
+/*
+HandSign HandSign -> String
+Compare playerSelection against computerSelection, the latter is randomly selected, and based on rules, show a message
+that can be:
+    - resultWin
+    - resultLost
+    - resultTie
+given: rock, expect: resultWin if choice's machine is scissors
+given: paper, expect: resultLost if choice's machine is scissors
+given: scissors, expect: resultTie if choice's machine is scissors
+function playSingleRound( playerSelection, computerSelection ) { ... playerSelection, computerSelection ...}
+*/
+function playSingleRound( playerSelection, computerSelection ) {
+
+    if ( playerSelection == computerSelection ) {
+        return resultTie;
+    } else if ( playerSelection == paper && computerSelection == rock ) {
+        return resultWin;
+    } else if ( playerSelection == paper && computerSelection == scissors ){
+        return resultLost;
+    } else if ( playerSelection == scissors && computerSelection == paper ) {
+        return resultWin;
+    } else if ( playerSelection == scissors && computerSelection == rock  ) {
+        return resultLost;
+    } else if ( playerSelection == rock && computerSelection == scissors ) {
+        return resultWin;
+    } else if ( playerSelection == rock && computerSelection == paper ) {
+        return resultLost;
+    } else return "No valid";
+}
 
 function game() {
 
@@ -13,12 +80,12 @@ function game() {
             console.log("You did not enter any.");
             --i;
         } else {
-            let machineChoice = createRandomHandSign();
-            let result = playOneRound( userChoice.toLowerCase().trim(), machineChoice );
+            let machineChoice = computerPlay( 3 );
+            let result = playSingleRound( userChoice.toLowerCase().trim(), machineChoice );
             console.log(result);
-            if ( result == "You WIN!" ) {
+            if ( result == resultWin ) {
                 ++userScore;
-            } else if ( result == "You LOST :)" ) {
+            } else if ( result == resultLost ) {
                 ++machineScore;
             } else if ( result == "No valid" ) --i;
         }
@@ -28,66 +95,4 @@ function game() {
     } else if ( userScore < machineScore ) {
         return "Machine is the winner"
     } else return "The game is tied"
-}
-/*
-- Data definition
-each element is a String.
-- Signature
-String String -> String
-- Purpose statement
-compare UserHandSign against machineHandSign, the last is randomly selected, and based on rules, show a message
-that can be: You WIN !, You LOST :), There is a tie.
-- Examples
-given: "rock", expect: "You WIN!" if choice's machine is "scisorss"
-given: "paper", expect: "You LOST :)"" if choice's machine is "scisorss"
-given: "scissors", expect: "There is a tie." if choice's machine is "scisorss"
-- Function template
-function playOneRound( UserHandSign ) { ... UserHandSign ...}
-*/
-function playOneRound( userHandSign, machineHandSign ) {
-
-    if ( userHandSign == machineHandSign ) {
-        return "There is a tie.";
-    } else if ( userHandSign == "paper" && machineHandSign == "rock" ) {
-        return "You WIN!";
-    } else if ( userHandSign == "paper" && machineHandSign == "scissors" ){
-        return "You LOST :)";
-    } else if ( userHandSign == "scisorss" && machineHandSign == "paper" ) {
-        return "You WIN!";
-    } else if ( userHandSign == "scisorss" && machineHandSign == "rock"  ) {
-        return "You LOST :)";
-    } else if ( userHandSign == "rock" && machineHandSign == "scisorss" ) {
-        return "You WIN!";
-    } else if ( userHandSign == "rock" && machineHandSign == "paper" ) {
-        return "You LOST :)";
-    } else return "No valid";
-}
-/*
-- Data definition
-A Number among 0, 1, 2 represents a handsign.
-- Signature
-nothing -> String
-- Purpose statement
-when it is invoke, use random and floor from built in function Math to
-get a random number.
-- Examples
-given: 2.3, expect: 2 -> scisorss
-given: 0, expect: 0 -> rock
-- Function template
-function createRandomHandSign() { ... }
-*/
-function createRandomHandSign() {
-    let numberRandom = Math.floor( (Math.random() * 3) );
-    switch ( numberRandom ) {
-        case 0:
-        return "rock";
-        break;
-        case 1:
-        return "paper";
-        break;
-        case 2:
-        return "scissors";
-        break;
-        default:
-    }
 }
