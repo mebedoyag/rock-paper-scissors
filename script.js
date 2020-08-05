@@ -23,8 +23,8 @@ given: 3, expect: rock
 given: 3, expect: paper
 function computerPlay( options ) { ... }
 */
-function computerPlay( options ) {
-    let numberRandom = Math.floor( Math.random() * options );
+function computerPlay() {
+    let numberRandom = Math.floor( Math.random() * 3 );
     switch ( numberRandom ) {
         case 0:
         return rock;
@@ -37,6 +37,12 @@ function computerPlay( options ) {
         break;
         // default:
     }
+}
+/*
+Number ->
+*/
+function userPlay() {
+    if
 }
 /*
 HandSign HandSign -> String
@@ -96,3 +102,5 @@ function game() {
         return "Machine is the winner"
     } else return "The game is tied"
 }
+
+playSingleRound( userPlay(), computerPlay() )
